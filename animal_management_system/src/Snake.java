@@ -1,13 +1,13 @@
-public class Cat extends Mammal {
-    Food favorite = Food.FISH;
+public class Snake extends Reptile {
+    Food favorite = Food.MEAT;
 
-    public Cat(String name, int age, int type) {
+    public Snake(String name, int age, int type) {
         super(name, age, type);
     }
 
     @Override
     void makeSound() {
-        System.out.println("야옹!");
+        System.out.println("쉬이!");
     }
 
     @Override

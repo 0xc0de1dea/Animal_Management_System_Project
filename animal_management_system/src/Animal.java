@@ -3,36 +3,40 @@ import java.util.Random;
 public abstract class Animal {
     String name;
     int age;
+    int type;
     int hunger;
     int happiness;
 
-    public Animal(String name, int age) {
+    public Animal(String name, int age, int type) {
         Random rand = new Random();
 
         this.name = name;
         this.age = age;
+        this.type = type;
         hunger = rand.nextInt(51) + 50;
         happiness = rand.nextInt(50) + 1;
     }
 
     abstract void makeSound();
 
-    void eat(){
-        System.out.println("배고픔 수치가 10 감소하였습니다.");
-        
-        this.hunger -= 10;
+    abstract int getFavorite();
 
-        if (this.hunger < 0) {
+    void eat(int amount){
+        System.out.println("배고픔 수치가 " + amount + " 감소하였습니다.");
+        
+        this.hunger -= amount;
+
+        if (this.hunger > 100) {
             System.out.println("배고픔 수치가 0으로 떨어졌습니다.\n행복도도 0으로 떨어집니다.");
-            this.hunger = 0;
+            this.hunger = 100;
             this.happiness = 0;
         }
     }
 
-    void enjoy(){
-        System.out.println("행복도가 10 증가하였습니다.");
+    void enjoy(int amount){
+        System.out.println("행복도가 " + amount + " 증가하였습니다.");
         
-        this.happiness += 10;
+        this.happiness += amount;
 
         if (this.happiness > 100){
             System.out.println("행복도가 MAX입니다.");
@@ -44,13 +48,13 @@ public abstract class Animal {
         System.out.println("배고픔 수치: " + this.hunger);
         System.out.println("행복도: " + this.happiness);
 
-        if (hunger == 0){
+        if (hunger == 100){
             System.out.println("몸에 기운이 모두 빠져 움직일 수 없습니다.");
-        } else if (hunger > 0 && hunger <= 33){
-            System.out.println("너무 배고파합니다.");
-        } else if (hunger > 33 && hunger <= 66){
-            System.out.println("조금 배고파합니다.");
         } else if (hunger > 66 && hunger <= 99){
+            System.out.println("너무 배고파합니다.");
+        } else if (hunger > 50 && hunger <= 66){
+            System.out.println("조금 배고파합니다.");
+        } else if (hunger > 0 && hunger <= 50){
             System.out.println("적당히 배불러합니다.");
         } else {
             System.out.println("포만감이 MAX입니다.");
